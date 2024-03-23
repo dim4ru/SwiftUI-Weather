@@ -40,67 +40,13 @@ struct ContentView: View {
                             .fontWeight(.bold)
                         Text("Mostly clear tonight. Tomorrow will be a little warmer and partly cloudy.")
                     }.padding(.all, 15)
-                    HStack (spacing: 10) {
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
-                        VStack {
-                            ZStack (alignment: .top) {
-                                Color.blue.frame(width: 50, height: 75)
-                                    .cornerRadius(10)
-                                Text("-3ºC").foregroundStyle(Color.white)
-                                    .padding(.top, 10)
-                            }
-                            Text("21:00")
-                            Image(systemName: "moon.stars")
-                        }
+                    HStack (alignment: .bottom, spacing: 10) {
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 0)
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: -15)
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: -34)
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 34)
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 50)
+                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 99)
                     }.padding(.top, 20)
                 }
                 VStack {
@@ -188,4 +134,38 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct WeatherHour: View {
+    var time: String
+    var imageName: String
+    var temperature: Int
+    let maxSize: Int = 75
+    
+    var body: some View {
+        VStack {
+            ZStack (alignment: .top) {
+                Color.blue.frame(width: 50, height: CGFloat(getChartSize(temperature: temperature, maxSize: maxSize)))
+                    .cornerRadius(10)
+                Text("\(temperature)ºC").foregroundStyle(Color.white)
+                    .padding(.top, 10)
+            }
+            Text(time)
+            Image(systemName: imageName)
+        }
+    }
+}
+
+func getChartSize(temperature: Int, maxSize: Int) -> Int {
+    let maxTemperature = 40
+    let result = abs(temperature) * maxSize / maxTemperature
+
+    switch result {
+        case 75...Int.max:
+            return 75
+        case Int.min..<40:
+            return 40
+        default:
+            return result
+    }
 }
