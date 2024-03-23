@@ -25,10 +25,10 @@ struct ContentView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
                         VStack (alignment: .leading) {
-                            Text("-3ºC")
+                            Text("-3º")
                                 .font(.system(size: 70, weight: .bold))
                                 .foregroundColor(.white)
-                            Text("Feels like -9")
+                            Text("Feels like -9º")
                                 .foregroundStyle(Color.gray)
                         }
                     }
@@ -41,12 +41,12 @@ struct ContentView: View {
                         Text("Mostly clear tonight. Tomorrow will be a little warmer and partly cloudy.")
                     }.padding(.all, 15)
                     HStack (alignment: .bottom, spacing: 10) {
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 0)
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: -15)
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: -34)
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 34)
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 50)
-                        WeatherHour(time: "21:00", imageName: "cloud.sun.rain.fill", temperature: 99)
+                        WeatherHour(time: "21:00", temperature: 0)
+                        WeatherHour(time: "21:00", temperature: -15)
+                        WeatherHour(time: "21:00", temperature: -34)
+                        WeatherHour(time: "21:00", temperature: 34)
+                        WeatherHour(time: "21:00", temperature: 50)
+                        WeatherHour(time: "21:00", temperature: 99)
                     }.padding(.top, 20)
                 }
                 VStack {
@@ -57,72 +57,11 @@ struct ContentView: View {
                         Text("Partly cloudy starting tomorrow, with highs near 0º for most of the week.")
                     }.padding(.all, 15)
                     VStack {
-                        HStack{
-                            Image(systemName: "sun.max.fill")
-                            VStack {
-                                Text("THU")
-                                Text("21").foregroundStyle(Color.gray)
-                            }
-                            HStack (spacing: 0) {
-                                Rectangle()
-                                    .fill(Color.blue.opacity(0.7))
-                                    .overlay(Text("-13º"))
-                                    .frame(width: 50, height: 50)
-                                Text("1º")
-                                    .frame(width: 50, height: 50)
-                                    .background(Color.blue)
-                                    .clipShape(
-                                        .rect(
-                                            bottomTrailingRadius: 10,
-                                            topTrailingRadius: 10
-                                        )
-                                    )
-                            }
-                        }
-                        HStack{
-                            Image(systemName: "sun.max.fill")
-                            VStack {
-                                Text("THU")
-                                Text("21").foregroundStyle(Color.gray)
-                            }
-                            HStack (spacing: 0) {
-                                Rectangle()
-                                    .fill(Color.blue.opacity(0.7))
-                                    .overlay(Text("-13º"))
-                                    .frame(width: 50, height: 50)
-                                Text("1º")
-                                    .frame(width: 50, height: 50)
-                                    .background(Color.blue)
-                                    .clipShape(
-                                        .rect(
-                                            bottomTrailingRadius: 10,
-                                            topTrailingRadius: 10
-                                        )
-                                    )
-                            }
-                        }
-                        HStack{
-                            Image(systemName: "sun.max.fill")
-                            VStack {
-                                Text("THU")
-                                Text("21").foregroundStyle(Color.gray)
-                            }
-                            HStack (spacing: 0) {
-                                Rectangle()
-                                    .fill(Color.blue.opacity(0.7))
-                                    .overlay(Text("-13º"))
-                                    .frame(width: 50, height: 50)
-                                Text("1º")
-                                    .frame(width: 50, height: 50)
-                                    .background(Color.blue)
-                                    .clipShape(
-                                        .rect(
-                                            bottomTrailingRadius: 10,
-                                            topTrailingRadius: 10
-                                        )
-                                    )
-                            }
-                        }
+                        WeatherDay(weekDay: "TUE", date: 21, nightTemperature: -13, dayTemperatire: 1)
+                        WeatherDay(weekDay: "WED", date: 22, nightTemperature: -1, dayTemperatire: 14)
+                        WeatherDay(weekDay: "FRI", date: 23, nightTemperature: -99, dayTemperatire: 99)
+                        WeatherDay(weekDay: "SAT", date: 24, nightTemperature: 0, dayTemperatire: 1)
+                        
                     }
                 }
                 Link(destination: URL(string: "https://google.com")!, label: {Text("About this data").underline()}).underline().padding(.top, 15)
@@ -138,7 +77,6 @@ struct ContentView: View {
 
 struct WeatherHour: View {
     var time: String
-    var imageName: String
     var temperature: Int
     let maxSize: Int = 75
     
@@ -147,11 +85,45 @@ struct WeatherHour: View {
             ZStack (alignment: .top) {
                 Color.blue.frame(width: 50, height: CGFloat(getChartSize(temperature: temperature, maxSize: maxSize)))
                     .cornerRadius(10)
-                Text("\(temperature)ºC").foregroundStyle(Color.white)
+                Text("\(temperature)º").foregroundStyle(Color.white)
                     .padding(.top, 10)
             }
             Text(time)
-            Image(systemName: imageName)
+            Image(systemName: "cloud.sun.rain.fill")
+        }
+    }
+}
+
+struct WeatherDay: View {
+    var weekDay: String
+    var date: Int
+    var nightTemperature: Int
+    var dayTemperatire: Int
+    
+    var body: some View {
+        HStack (alignment: .center) {
+            HStack {
+                Image(systemName: "sun.max.fill")
+                VStack {
+                    Text(weekDay)
+                    Text(String(date)).foregroundStyle(Color.gray)
+                }.frame(width: 40)
+            }
+            HStack (spacing: 0) {
+                Rectangle()
+                    .fill(Color.blue.opacity(0.7))
+                    .overlay(Text("\(nightTemperature)º"))
+                    .frame(width: 50, height: 50)
+                Text("\(dayTemperatire)º")
+                    .frame(width: 50, height: 50)
+                    .background(Color.blue)
+                    .clipShape(
+                        .rect(
+                            bottomTrailingRadius: 10,
+                            topTrailingRadius: 10
+                        )
+                    )
+            }
         }
     }
 }
