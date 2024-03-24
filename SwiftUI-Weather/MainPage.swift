@@ -10,7 +10,7 @@ import SwiftUI
 struct MainPage: View {
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color.blue]), startPoint: .center, endPoint: .top).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            Color.black
             VStack {
                 Text("Omsk, Russia")
                     .font(.system(size: 16, weight: .medium, design: .default))
@@ -33,6 +33,16 @@ struct MainPage: View {
                                     .foregroundColor(.white)
                                 Text("Feels like -9º")
                                     .foregroundStyle(Color.gray)
+                            }
+                            .onAppear {
+                                WeatherController.shared.fetchData { result in
+                                    switch result {
+                                    case .success(let data):
+                                        print("Data: \(data)")
+                                    case .failure(let failure):
+                                        print(failure.localizedDescription)
+                                    }
+                                }
                             }
                         }
                     }
@@ -96,4 +106,8 @@ struct MainPage: View {
             }
         }
     }
+}
+
+#Preview {
+    MainPage()
 }
