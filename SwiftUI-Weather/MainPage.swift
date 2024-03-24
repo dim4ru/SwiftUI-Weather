@@ -10,6 +10,7 @@ import SwiftUI
 struct MainPage: View {
     @State private var temperature: Int = 0
     @State private var feelsLike: Int = 0
+    @State private var description: String = ""
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct MainPage: View {
                             .font(.system(size: 42, weight: .bold, design: .default))
                             .foregroundColor(.white)
                         HStack (spacing: 16) {
-                            Image(systemName: "cloud.drizzle.fill")
+                            Image(systemName: getIconName(description: description))
                                 .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -43,6 +44,7 @@ struct MainPage: View {
                                     case .success(let forecastData):
                                         temperature = toCelsius(kelvin: forecastData.main.temp)
                                         feelsLike = toCelsius(kelvin: forecastData.main.feels_like)
+                                        description = forecastData.weather[0].description
                                     case .failure(let failure):
                                         print(failure.localizedDescription)
                                     }

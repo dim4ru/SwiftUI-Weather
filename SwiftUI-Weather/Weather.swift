@@ -82,3 +82,28 @@ func setIndicatorAppearance() {
 func toCelsius(kelvin: Double) -> Int {
     return Int(round(kelvin - 273.15))
 }
+
+func getIconName(description: String) -> String {
+    switch description {
+    case "clear sky":
+        return "sun.max.fill"
+    case "few clouds":
+        return "cloud.sun.fill"
+    case "scattered clouds":
+        return "cloud"
+    case "broken clouds":
+        return "cloud.fill"
+    case "shower rain":
+        return "cloud.heavyrain.fill"
+    case "rain":
+        return "cloud.rain.fill"
+    case "thunderstorm":
+        return "cloud.bolt.fill"
+    case "snow":
+        return "cloud.snow.fill"
+    case "mist":
+        return "cloud.fog.fill"
+    default:
+        return "doc"
+    }
+}
