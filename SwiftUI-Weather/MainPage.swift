@@ -37,8 +37,8 @@ struct MainPage: View {
                             .onAppear {
                                 WeatherController.shared.fetchData { result in
                                     switch result {
-                                    case .success(let data):
-                                        print("Data: \(data)")
+                                    case .success(let forecastData):
+                                        print("Data: \(forecastData.main.temp)")
                                     case .failure(let failure):
                                         print(failure.localizedDescription)
                                     }

@@ -14,6 +14,7 @@
 		0ADB547E2BB0904C00850A9C /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB547D2BB0904C00850A9C /* Weather.swift */; };
 		0ADB54802BB091D700850A9C /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB547F2BB091D700850A9C /* WeatherController.swift */; };
 		0ADB54822BB092E300850A9C /* api-keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADB54812BB092E300850A9C /* api-keys.plist */; };
+		0ADB54842BB0AFA400850A9C /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADB54832BB0AFA300850A9C /* Forecast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0ADB547D2BB0904C00850A9C /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		0ADB547F2BB091D700850A9C /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		0ADB54812BB092E300850A9C /* api-keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "api-keys.plist"; sourceTree = "<group>"; };
+		0ADB54832BB0AFA300850A9C /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				0A57CE1A2B96207100491462 /* SwiftUI_WeatherApp.swift */,
 				0ADB54812BB092E300850A9C /* api-keys.plist */,
 				0ADB54792BB08E0000850A9C /* MainPage.swift */,
+				0ADB54832BB0AFA300850A9C /* Forecast.swift */,
 				0ADB547D2BB0904C00850A9C /* Weather.swift */,
 				0ADB547F2BB091D700850A9C /* WeatherController.swift */,
 				0A57CE1E2B96207500491462 /* Assets.xcassets */,
@@ -153,6 +156,7 @@
 				0A57CE1B2B96207100491462 /* SwiftUI_WeatherApp.swift in Sources */,
 				0ADB547A2BB08E0000850A9C /* MainPage.swift in Sources */,
 				0ADB54802BB091D700850A9C /* WeatherController.swift in Sources */,
+				0ADB54842BB0AFA400850A9C /* Forecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

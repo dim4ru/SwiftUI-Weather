@@ -39,7 +39,7 @@ class WeatherController {
         }
     }
     
-    func fetchData(completion: @escaping (Result<Data, Error>) -> ()) {
+    func fetchData(completion: @escaping (Result<ForecastResults, Error>) -> ()) {
         guard (url != nil) else {
             completion(.failure(NetworkError.badUrl))
             return
@@ -52,12 +52,19 @@ class WeatherController {
                 }
                 return
             }
-            completion(.success(data))
+            
+            let decoder = JSONDecoder()
+            do {
+                let forecastData = try decoder.decode(ForecastResults.self, from: data)
+                completion(.success(forecastData))
+            } catch {
+                completion(.failure(NetworkError.invalidData))
+            }
         }.resume()
     }
 }
 
 enum NetworkError: Error {
-    case badUrl, badRequest, badResponse
+    case badUrl, badRequest, badResponse, invalidData
 }
 //54.985424150999584, 73.38738658760745
