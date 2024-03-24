@@ -78,3 +78,7 @@ func setIndicatorAppearance() {
     UIPageControl.appearance().currentPageIndicatorTintColor = .gray
     UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
 }
+
+func toCelsius(kelvin: Double) -> Int {
+    return Int(round(kelvin - 273.15))
+}

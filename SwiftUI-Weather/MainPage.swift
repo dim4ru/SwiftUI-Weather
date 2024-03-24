@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainPage: View {
+    @State private var temperature: Int = 0
+    @State private var feelsLike: Int = 0
+    
     var body: some View {
         ZStack {
             Color.black
@@ -28,17 +31,18 @@ struct MainPage: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
                             VStack (alignment: .leading) {
-                                Text("-3º")
+                                Text("\(String(temperature))ºC")
                                     .font(.system(size: 70, weight: .bold))
                                     .foregroundColor(.white)
-                                Text("Feels like -9º")
+                                Text("Feels like \(String(feelsLike))ºC")
                                     .foregroundStyle(Color.gray)
                             }
                             .onAppear {
                                 WeatherController.shared.fetchData { result in
                                     switch result {
                                     case .success(let forecastData):
-                                        print("Data: \(forecastData.main.temp)")
+                                        temperature = toCelsius(kelvin: forecastData.main.temp)
+                                        feelsLike = toCelsius(kelvin: forecastData.main.feels_like)
                                     case .failure(let failure):
                                         print(failure.localizedDescription)
                                     }
